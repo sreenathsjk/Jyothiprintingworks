@@ -1,0 +1,6 @@
+{
+  "name": "Jyothi Printing Works",
+  "description": "Premium custom printing studio specializing in high-quality custom T-shirts, blouse printing, sports jerseys, corporate uniforms, and bulk orders.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
