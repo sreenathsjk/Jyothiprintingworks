@@ -37,8 +37,8 @@ export default function Gallery() {
     },
     {
       id: 'g3',
-      url: 'https://images.unsplash.com/photo-1610030469668-93535c17b6b3?auto=format&fit=crop&q=80&w=800',
-      title: 'Silk Embroidery Threadwork detail',
+      url: 'https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&q=80&w=800',
+      title: 'Bespoke Peacock Silk Print Detail',
       category: 'ethnic',
       aspect: 'square'
     },
@@ -101,7 +101,7 @@ export default function Gallery() {
 
   const handleWhatsAppInquiry = (img: GalleryImage) => {
     const message = `Hello Jyothi Printing Works! I saw the photo "${img.title}" in your print studio gallery and would like to ask some questions regarding fabric printing.`;
-    const url = `https://wa.me/919900000000?text=${encodeURIComponent(message)}`;
+    const url = `https://wa.me/919182703766?text=${encodeURIComponent(message)}`;
     window.open(url, '_blank');
   };
 
@@ -152,7 +152,10 @@ export default function Gallery() {
               transition={{ duration: 0.4 }}
               className="break-inside-avoid relative overflow-hidden rounded-3xl bg-white dark:bg-neutral-900 border border-neutral-200/50 dark:border-neutral-800 p-3 group shadow-sm hover:shadow-md transition-all duration-300"
             >
-              <div className="overflow-hidden rounded-2xl bg-neutral-100 dark:bg-neutral-950 relative">
+              <div 
+                onClick={() => setSelectedImg(img)}
+                className="overflow-hidden rounded-2xl bg-neutral-100 dark:bg-neutral-950 relative cursor-zoom-in"
+              >
                 <img
                   src={img.url}
                   alt={img.title}
@@ -162,13 +165,12 @@ export default function Gallery() {
                 
                 {/* Hover Visual Overlay */}
                 <div className="absolute inset-0 bg-neutral-950/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-5">
-                  <button
-                    onClick={() => setSelectedImg(img)}
+                  <div
                     className="self-end p-2 rounded-full bg-white/90 dark:bg-neutral-900/90 text-neutral-800 dark:text-neutral-200 shadow-md hover:bg-orange-500 hover:text-white hover:scale-110 transition-all cursor-pointer"
                     aria-label="Zoom Image"
                   >
                     <Eye className="h-4.5 w-4.5" />
-                  </button>
+                  </div>
 
                   <div className="space-y-1.5 text-left">
                     <span className="text-[9px] font-black uppercase tracking-widest text-orange-400">

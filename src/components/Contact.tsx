@@ -5,7 +5,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Phone, Mail, Clock, Send, ShieldCheck, MapPin, MessageSquare, Instagram, Smartphone, Upload, FileText, AlertCircle, X } from 'lucide-react';
+import { Phone, Mail, Clock, Send, ShieldCheck, MapPin, MessageSquare, Instagram, Smartphone, Upload, FileText, AlertCircle, X, ArrowUpRight } from 'lucide-react';
 import { QuoteRequest } from '../types';
 
 interface ContactProps {
@@ -437,6 +437,38 @@ export default function Contact({ prefilledRequirement = '' }: ContactProps) {
               )}
             </AnimatePresence>
 
+          </div>
+
+          {/* Quick WhatsApp Support Banner */}
+          <div className="max-w-3xl mx-auto mt-10 p-6 rounded-3xl bg-emerald-500/5 dark:bg-emerald-500/10 border border-emerald-500/20 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
+              <div className="p-3.5 rounded-2xl bg-emerald-500/10 text-emerald-500 shrink-0">
+                <svg 
+                  className="h-6 w-6 fill-current" 
+                  viewBox="0 0 24 24" 
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.713-1.455L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.625 1.451 5.437.002 9.861-4.366 9.864-9.736.001-2.596-1.002-5.037-2.83-6.87C16.471 2.163 14.043 1.157 11.451 1.15c-5.438 0-9.867 4.367-9.87 9.742-.001 1.954.512 3.86 1.482 5.585L2.01 22.013l5.837-1.523c.31.18.513.29.8.464zM16.634 13.91c-.27-.135-1.597-.788-1.845-.878-.248-.09-.43-.136-.61.135-.18.272-.697.879-.854 1.059-.157.18-.315.203-.585.068-.27-.136-1.14-.42-2.172-1.341-.803-.717-1.345-1.603-1.502-1.874-.157-.271-.017-.417.118-.552.122-.121.27-.315.405-.473.135-.158.18-.271.27-.451.09-.18.045-.339-.022-.474-.068-.135-.61-1.472-.836-2.013-.22-.53-.442-.458-.61-.466-.157-.008-.338-.01-.52-.01-.18 0-.473.067-.72.339-.247.271-.944.924-.944 2.253 0 1.329.967 2.61 1.102 2.79.135.18 1.9 2.901 4.6 4.068.643.278 1.144.444 1.536.568.646.206 1.233.176 1.697.108.517-.076 1.598-.653 1.823-1.282.225-.63.225-1.17.157-1.282-.067-.113-.247-.18-.517-.315z" />
+                </svg>
+              </div>
+              <div>
+                <h4 className="font-extrabold text-sm text-neutral-800 dark:text-neutral-100 uppercase tracking-wider">
+                  Prefer instant WhatsApp messaging?
+                </h4>
+                <p className="text-xs text-neutral-400 dark:text-neutral-500 font-semibold mt-1 leading-relaxed">
+                  Have artwork designs or urgent lead requests? Connect directly with our lead garment designer on WhatsApp for instant evaluation and file review.
+                </p>
+              </div>
+            </div>
+            <a
+              href={`https://wa.me/919182703766?text=${encodeURIComponent("Hello Jyothi Print Studio! I'm viewing your products and would like to inquire about custom requirements.")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-5 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs uppercase tracking-wider transition-all shadow-md shadow-emerald-500/10 shrink-0 flex items-center justify-center gap-1.5 cursor-pointer"
+            >
+              <span>Chat with Designer</span>
+              <ArrowUpRight className="h-4 w-4" />
+            </a>
           </div>
 
       </div>

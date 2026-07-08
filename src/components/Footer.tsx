@@ -26,6 +26,8 @@ export default function Footer({ onNavigate, currentPage }: FooterProps) {
     { id: 'services', label: 'Services' },
     { id: 'gallery', label: 'Gallery' },
     { id: 'bulk-orders', label: 'Bulk Orders' },
+    { id: 'track-order', label: 'Track Order' },
+    { id: 'my-orders', label: 'My Account' },
     { id: 'faqs', label: 'FAQs' },
     { id: 'contact', label: 'Contact' },
   ];
@@ -178,7 +180,7 @@ export default function Footer({ onNavigate, currentPage }: FooterProps) {
             {/* Social Action Buttons */}
             <div className="pt-6 mt-6 border-t border-neutral-800/80 flex flex-wrap items-center gap-3">
               <a
-                href="https://wa.me/919491218950?text=Hello%20Jyothi%20Printing%20Works!%20I'd%20like%20to%20discuss%20a%20printing%20requirement."
+                href="https://wa.me/919182703766?text=Hello%20Jyothi%20Printing%20Works!%20I'd%20like%20to%20discuss%20a%20printing%20requirement."
                 target="_blank"
                 rel="noreferrer"
                 className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs shadow-md transition-all cursor-pointer"
@@ -232,7 +234,7 @@ export default function Footer({ onNavigate, currentPage }: FooterProps) {
           
           <div className="flex items-center gap-4.5">
             <a
-              href="https://wa.me/919491218950?text=Hello"
+              href="https://wa.me/919182703766?text=Hello"
               target="_blank"
               rel="noreferrer"
               className="p-2.5 rounded-full bg-neutral-800 text-neutral-400 hover:text-white hover:bg-orange-500 transition-all cursor-pointer shadow-sm"

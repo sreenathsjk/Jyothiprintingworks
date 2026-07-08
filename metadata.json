@@ -1,6 +1,6 @@
 {
   "name": "Jyothi Printing Works",
-  "description": "Premium custom printing studio specializing in high-quality custom T-shirts, blouse printing, sports jerseys, corporate uniforms, and bulk orders.",
+  "description": "Jyothi Printing Works premium custom apparel and print catalog storefront featuring custom street fashion, heavy loopback hoodies, elegant bridal blouses, and interactive design studios.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

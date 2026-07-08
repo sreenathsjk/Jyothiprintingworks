@@ -1,0 +1,144 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // 1. Global Safety Net - default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Reusable global helper functions
+    function isSignedIn() {
+      return request.auth != null && (
+        request.auth.token.email_verified == true || 
+        request.auth.token.firebase.sign_in_provider == 'password' ||
+        request.auth.token.firebase.sign_in_provider == 'google.com'
+      );
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function getUserEmail() {
+      return request.auth.token.email;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && getUserEmail().lower() == 'content2u.sj@gmail.com'.lower();
+    }
+
+    function isValidProduct(data) {
+      return data.id is string
+             && data.title is string
+             && data.title.size() >= 2
+             && data.title.size() <= 150
+             && data.tagline is string
+             && data.price is number
+             && data.price >= 0
+             && data.originalPrice is number
+             && data.originalPrice >= 0
+             && data.category is string
+             && data.images is list
+             && data.images.size() > 0
+             && data.colors is list
+             && data.sizes is list
+             && data.description is string;
+    }
+
+    // 2. User Profiles Collection Rules
+    match /users/{userId} {
+      allow get: if isOwner(userId);
+      
+      allow create: if isOwner(userId) 
+                    && incoming().id == userId
+                    && incoming().email is string
+                    && incoming().name is string
+                    && incoming().name.size() >= 1
+                    && incoming().name.size() <= 100
+                    && incoming().phone is string
+                    && incoming().keys().size() == 4;
+
+      allow update: if isOwner(userId)
+                    && incoming().id == userId
+                    && incoming().email.lower() == existing().email.lower() // Case-insensitive email immutability
+                    && incoming().name is string
+                    && incoming().name.size() >= 1
+                    && incoming().name.size() <= 100
+                    && incoming().phone is string
+                    && incoming().keys().size() == 4;
+
+      allow delete: if false; // Hardened deletion guard
+    }
+
+    // 3. Orders Collection Rules
+    match /orders/{orderId} {
+      // Get single order: only allowed if user is signed in and owns the order
+      allow get: if isSignedIn() 
+                 && isValidId(orderId) 
+                 && resource.data.userEmail.lower() == getUserEmail().lower();
+      
+      // List query safety: force client-side queries to filter strictly by user email
+      allow list: if isSignedIn()
+                  && resource.data.userEmail.lower() == getUserEmail().lower();
+
+      allow create: if isSignedIn()
+                    && isValidId(orderId)
+                    && incoming().orderId == orderId
+                    && incoming().userEmail.lower() == getUserEmail().lower()
+                    && incoming().totalAmount >= 0
+                    && incoming().quantity > 0
+                    && incoming().customerName is string
+                    && incoming().customerName.size() >= 2
+                    && incoming().currentStatus == 'design_approval'
+                    && incoming().items is list
+                    && incoming().items.size() > 0;
+
+      allow update: if isSignedIn()
+                    && isValidId(orderId)
+                    && existing().userEmail.lower() == getUserEmail().lower()
+                    && incoming().orderId == existing().orderId
+                    && incoming().userEmail == existing().userEmail
+                    && (
+                      // Action: Admin or demo client updating status/steps
+                      incoming().diff(existing()).affectedKeys().hasOnly(['currentStatus', 'steps'])
+                    );
+
+      allow delete: if false; // Orders are immutable and cannot be deleted via client SDK
+    }
+
+    // 4. Products Catalog Collection Rules
+    match /products/{productId} {
+      // Any visitor can read products
+      allow get, list: if true;
+
+      // Only administrators can add new products
+      allow create: if isAdmin()
+                    && isValidId(productId)
+                    && incoming().id == productId
+                    && isValidProduct(incoming());
+
+      // Only administrators can update existing products
+      allow update: if isAdmin()
+                    && isValidId(productId)
+                    && incoming().id == existing().id
+                    && isValidProduct(incoming());
+
+      // Only administrators can delete products from the catalog
+      allow delete: if isAdmin()
+                    && isValidId(productId);
+    }
+  }
+}

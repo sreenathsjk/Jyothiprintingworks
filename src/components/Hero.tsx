@@ -22,8 +22,8 @@ export default function Hero({ onNavigate }: HeroProps) {
     },
     {
       title: 'Designer Blouse',
-      desc: 'Luxury Silk Printing',
-      image: 'https://images.unsplash.com/photo-1610030469668-93535c17b6b3?auto=format&fit=crop&q=80&w=800',
+      desc: 'Bespoke Peacock Print',
+      image: 'https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&q=80&w=800',
       badge: 'Bespoke'
     },
     {

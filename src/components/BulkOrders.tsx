@@ -71,10 +71,10 @@ export default function BulkOrders() {
     // 3. Apply volume discount tiers
     let discount = 0;
     if (quantity >= 25 && quantity < 50) discount = 5;
-    else if (quantity >= 50 && quantity < 100) discount = 12;
-    else if (quantity >= 100 && quantity < 250) discount = 22;
-    else if (quantity >= 250 && quantity < 500) discount = 32;
-    else if (quantity >= 500) discount = 40;
+    else if (quantity >= 50 && quantity < 100) discount = 10;
+    else if (quantity >= 100 && quantity < 250) discount = 15;
+    else if (quantity >= 250 && quantity < 500) discount = 20;
+    else if (quantity >= 500) discount = 25;
 
     setDiscountPercent(discount);
 
@@ -126,7 +126,7 @@ export default function BulkOrders() {
 
 Please review these specifications and send an official digital invoice or fabric mockups.`;
 
-    const url = `https://wa.me/919491218950?text=${encodeURIComponent(message)}`;
+    const url = `https://wa.me/919182703766?text=${encodeURIComponent(message)}`;
     window.open(url, '_blank');
   };
 
@@ -270,10 +270,10 @@ Please review these specifications and send an official digital invoice or fabri
               {/* Discount Indicator Tiers info */}
               <div className="flex justify-between text-[10px] text-neutral-400 uppercase tracking-wider font-extrabold mt-3.5">
                 <span>MOQ: 10 pcs</span>
-                <span className={quantity >= 50 ? 'text-orange-500 font-black' : ''}>50 pcs: 12% Off</span>
-                <span className={quantity >= 100 ? 'text-orange-500 font-black' : ''}>100 pcs: 22% Off</span>
-                <span className={quantity >= 250 ? 'text-orange-500 font-black' : ''}>250 pcs: 32% Off</span>
-                <span className={quantity >= 500 ? 'text-orange-500 font-black' : ''}>500+ pcs: 40% Off</span>
+                <span className={quantity >= 50 ? 'text-orange-500 font-black' : ''}>50 pcs: 10% Off</span>
+                <span className={quantity >= 100 ? 'text-orange-500 font-black' : ''}>100 pcs: 15% Off</span>
+                <span className={quantity >= 250 ? 'text-orange-500 font-black' : ''}>250 pcs: 20% Off</span>
+                <span className={quantity >= 500 ? 'text-orange-500 font-black' : ''}>500+ pcs: 25% Off</span>
               </div>
             </div>
 

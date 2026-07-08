@@ -14,241 +14,400 @@ interface LogoProps {
 
 export default function Logo({
   className = "h-12 w-auto",
-  variant = "color",
-  showText = true,
+  variant = 'color',
   iconOnly = false,
 }: LogoProps) {
-  // Brand color scheme configuration
-  const magentaColor = "#EC008C"; // Vibrant Pink/Magenta
-  const cyanColor = "#0091FF";    // Process Cyan/Light Blue
-  const yellowColor = "#FFD200";  // Golden Yellow
-  const blueColor = "#003E8A";    // Deep Royal Blue
-  
-  // Charcoal elements dynamically adapt to white on dark backgrounds for accessibility
-  const charcoalColor = variant === "dark" ? "#F5F5F5" : "#231F20";
-  const butterflyBodyColor = variant === "dark" ? "#E5E5E5" : "#231F20";
-
-  // Reusable Butterfly component to keep both modes high-fidelity
-  const renderButterfly = () => (
-    <g id="butterfly-graphics">
-      {/* Top-Left Wing (Magenta-Pink) */}
-      <path
-        d="M135,160 C120,140 85,80 35,95 C10,105 15,140 40,155 C70,175 110,170 135,160 Z"
-        fill={magentaColor}
-      />
-      {/* Left-Top internal details (lighter pink highlights for layered vector effect) */}
-      <path
-        d="M115,148 C100,135 75,115 50,122 C45,125 55,135 75,138 Z"
-        fill="#FFA6DF"
-        opacity="0.8"
-      />
-      <path
-        d="M120,155 C105,150 85,142 70,148 C65,152 75,158 90,155 Z"
-        fill="#FFA6DF"
-        opacity="0.8"
-      />
-
-      {/* Bottom-Left Wing (Cyan-Blue) */}
-      <path
-        d="M135,165 C115,170 75,170 75,205 C75,235 105,250 120,235 C130,225 133,200 135,165 Z"
-        fill={cyanColor}
-      />
-      {/* Yellow Drop inside Bottom-Left Wing (Matches original logo) */}
-      <path
-        d="M98,198 C88,206 82,218 85,225 C90,232 100,225 104,212 Z"
-        fill={yellowColor}
-      />
-      {/* White accent inside Bottom-Left Wing */}
-      <path
-        d="M120,178 C112,183 100,188 95,200 C98,200 106,192 115,183 Z"
-        fill="#FFFFFF"
-        opacity="0.7"
-      />
-
-      {/* Top-Right Wing (Yellow-Orange) */}
-      <path
-        d="M145,158 C160,115 200,90 220,125 C235,150 215,190 185,205 C170,212 155,212 145,208 Z"
-        fill={yellowColor}
-      />
-      {/* White Teardrop accent inside Top-Right Wing (Matches original logo) */}
-      <path
-        d="M160,150 C175,125 195,105 208,115 C215,122 205,142 185,162 C172,172 162,168 160,150 Z"
-        fill="#FFFFFF"
-        opacity="0.85"
-      />
-
-      {/* Bottom-Right Wing (Cyan/Light Blue) */}
-      <path
-        d="M145,215 C150,247 165,282 190,282 C210,282 210,247 190,227 C175,215 155,213 145,215 Z"
-        fill={cyanColor}
-      />
-      {/* White accent inside Bottom-Right Wing */}
-      <path
-        d="M155,222 C168,230 180,248 185,260 C178,260 166,242 155,230 Z"
-        fill="#FFFFFF"
-        opacity="0.75"
-      />
-
-      {/* Butterfly Antennae & Body */}
-      {/* Antennae with circular heads */}
-      <path
-        d="M138,150 Q130,115 110,105 M142,148 Q152,112 165,100"
-        stroke={butterflyBodyColor}
-        strokeWidth="3.5"
-        strokeLinecap="round"
-        fill="none"
-      />
-      <circle cx="110" cy="105" r="4.5" fill={butterflyBodyColor} />
-      <circle cx="165" cy="100" r="4.5" fill={butterflyBodyColor} />
-
-      {/* Body tilted slightly for organic flying angle */}
-      <ellipse cx="140" cy="165" rx="3.5" ry="16" fill={butterflyBodyColor} transform="rotate(-15 140 165)" />
-    </g>
-  );
-
-  // If iconOnly is specified (e.g., for tiny mobile avatars), we display just the premium butterfly
   if (iconOnly) {
     return (
-      <div className={`flex items-center justify-center select-none ${className}`}>
-        <svg
-          viewBox="30 80 195 210"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-full w-auto"
-          id="jyothi-logo-butterfly-svg"
-        >
-          {renderButterfly()}
-        </svg>
-      </div>
+      <svg 
+        viewBox="0 0 120 120" 
+        className={`${className} select-none`}
+        fill="none" 
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        {/* Definition of Gradients */}
+        <defs>
+          <linearGradient id="butterfly-yellow-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#FFA000" />
+            <stop offset="100%" stopColor="#FFD400" />
+          </linearGradient>
+        </defs>
+
+        {/* Colorful Butterfly */}
+        <g id="butterfly" transform="translate(5, 5)">
+          {/* Antennae */}
+          <path 
+            d="M 58,68 C 54,46 40,42 43,36" 
+            className="stroke-neutral-800 dark:stroke-neutral-200"
+            strokeWidth="1.8" 
+            strokeLinecap="round" 
+            fill="none"
+          />
+          <circle cx="43" cy="36" r="2" className="fill-neutral-800 dark:fill-neutral-200" />
+          
+          <path 
+            d="M 60,68 C 64,46 78,42 75,36" 
+            className="stroke-neutral-800 dark:stroke-neutral-200"
+            strokeWidth="1.8" 
+            strokeLinecap="round" 
+            fill="none"
+          />
+          <circle cx="75" cy="36" r="2" className="fill-neutral-800 dark:fill-neutral-200" />
+
+          {/* Left Top Wing - Magenta */}
+          <path 
+            d="M 58,80 C 40,78 12,68 10,52 C 8,36 32,32 58,68 Z" 
+            fill="#E5007D" 
+          />
+          {/* Left Top Wing Accents */}
+          <path 
+            d="M 54,76 C 42,74 22,66 20,56 C 18,50 35,46 54,72 Z" 
+            fill="#FF8EC6" 
+            className="opacity-70"
+          />
+          <path 
+            d="M 50,72 C 40,70 28,64 26,58 C 24,54 36,52 50,68 Z" 
+            fill="#FFFFFF" 
+            className="opacity-40"
+          />
+
+          {/* Left Bottom Wing - Cyan/Blue */}
+          <path 
+            d="M 58,80 C 42,94 15,102 18,116 C 21,126 43,122 58,88 Z" 
+            fill="#009EE0" 
+          />
+          {/* Left Bottom Wing Accent - Yellow Petal */}
+          <path 
+            d="M 52,86 C 42,94 28,100 30,108 C 32,112 44,108 52,94 Z" 
+            fill="#FFD400" 
+          />
+          <path 
+            d="M 46,92 C 38,98 29,102 31,106 C 32,108 38,106 44,98 Z" 
+            fill="#FFFFFF" 
+            className="opacity-40"
+          />
+
+          {/* Right Top Wing - Golden Yellow */}
+          <path 
+            d="M 60,80 C 78,78 108,68 110,52 C 112,36 88,32 60,68 Z" 
+            fill="url(#butterfly-yellow-grad)" 
+          />
+          {/* Right Top Wing Accent - Magenta */}
+          <path 
+            d="M 64,76 C 76,74 96,66 98,56 C 100,50 83,46 64,72 Z" 
+            fill="#E5007D" 
+            className="opacity-80"
+          />
+          <path 
+            d="M 68,72 C 76,70 88,64 90,58 C 92,54 81,52 68,68 Z" 
+            fill="#FFFFFF" 
+            className="opacity-40"
+          />
+
+          {/* Right Bottom Wing - Cyan/Blue */}
+          <path 
+            d="M 60,80 C 78,94 103,102 100,116 C 97,126 75,122 60,88 Z" 
+            fill="#009EE0" 
+          />
+          {/* Right Bottom Wing Accent */}
+          <path 
+            d="M 64,84 C 74,92 90,98 88,106 C 86,110 74,106 64,92 Z" 
+            fill="#FFFFFF" 
+            className="opacity-40"
+          />
+
+          {/* Body / Thorax */}
+          <path 
+            d="M 59,62 C 61,62 62,70 62,82 C 62,94 61,102 59,102 C 57,102 56,94 56,82 C 56,70 57,62 59,62 Z" 
+            className="fill-neutral-900 dark:fill-neutral-100" 
+          />
+        </g>
+      </svg>
     );
   }
 
-  // Otherwise, return the complete high-fidelity branded SVG wordmark
   return (
-    <div className={`flex items-center select-none ${className}`}>
-      <svg
-        viewBox="15 35 590 340"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className="h-full w-auto"
-        id="jyothi-logo-svg"
-      >
-        {/* Left Side: Butterfly graphic */}
-        {renderButterfly()}
+    <svg 
+      viewBox="0 0 460 160" 
+      className={`${className} select-none`}
+      fill="none" 
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      {/* Definition of Gradients & Filters */}
+      <defs>
+        {/* J gradient - Royal deep blue to vibrant blue/cyan */}
+        <linearGradient id="j-gradient" x1="80%" y1="0%" x2="20%" y2="100%">
+          <stop offset="0%" stopColor="#012350" />
+          <stop offset="60%" stopColor="#004DA3" />
+          <stop offset="100%" stopColor="#0088CC" />
+        </linearGradient>
 
-        {/* Custom Typography "Jyothi" */}
-        <g id="typography">
-          {/* J - Elegant serif dark blue letter swooping down */}
-          <path
-            d="M185,140 H250 M218,140 V240 C218,290 170,305 130,285 C115,278 110,265 125,255 C145,240 185,250 185,225 V140 Z"
-            fill={blueColor}
-          />
+        {/* h gradient - Warm yellow orange to gold */}
+        <linearGradient id="h-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#FFA000" />
+          <stop offset="100%" stopColor="#FFD400" />
+        </linearGradient>
 
-          {/* y - Magenta/pink */}
-          <path
-            d="M245,180 L265,235 L285,180 H300 L270,255 C260,280 250,290 235,285 L230,270 C240,270 248,260 252,248 L232,180 H245 Z"
-            fill={magentaColor}
-          />
+        {/* Butterfly yellow gradient */}
+        <linearGradient id="butterfly-yellow-grad-full" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#FFA000" />
+          <stop offset="100%" stopColor="#FFD400" />
+        </linearGradient>
+      </defs>
 
-          {/* o - Blue circle with a CMYK color registration target inside */}
-          <g id="letter-o">
-            {/* Outer Circle of 'o' (vivid process blue) */}
-            <path
-              d="M335,175 C310,175 295,195 295,220 C295,245 310,265 335,265 C360,265 375,245 375,220 C375,195 360,175 335,175 Z M335,190 C348,190 357,202 357,220 C357,238 348,250 335,250 C322,250 313,238 313,220 C313,202 322,190 335,190 Z"
-              fill="#0070C0"
-            />
-            {/* White masking circle disk under target to provide perfect legibility */}
-            <circle cx="335" cy="220" r="18" fill="#FFFFFF" />
-            
-            {/* Registration Mark Center Alignment target inside the hole of 'o' */}
-            <circle cx="335" cy="220" r="16" stroke={charcoalColor} strokeWidth="1.5" fill="none" />
-            <circle cx="335" cy="220" r="8" fill="none" stroke={charcoalColor} strokeWidth="1" />
-            {/* Hairlines */}
-            <path d="M335,204 V236 M319,220 H351" stroke={charcoalColor} strokeWidth="1.5" />
-            
-            {/* Four high-contrast CMYK quadrants */}
-            {/* Cyan quadrant (Top Left) */}
-            <path d="M335,212 A8,8 0 0,0 327,220 H335 V212 Z" fill={cyanColor} />
-            {/* Magenta quadrant (Top Right) */}
-            <path d="M335,212 V220 H343 A8,8 0 0,0 335,212 Z" fill={magentaColor} />
-            {/* Yellow quadrant (Bottom Right) */}
-            <path d="M335,220 H343 A8,8 0 0,1 335,228 V220 Z" fill={yellowColor} />
-            {/* Black/Key quadrant (Bottom Left) */}
-            <path d="M327,220 A8,8 0 0,0 335,228 V220 H327 Z" fill={charcoalColor} />
-          </g>
+      {/* 1. Colorful Butterfly on the Left */}
+      <g id="butterfly" transform="translate(5, 5)">
+        {/* Antennae */}
+        <path 
+          d="M 58,68 C 54,46 40,42 43,36" 
+          className="stroke-neutral-800 dark:stroke-neutral-200"
+          strokeWidth="1.8" 
+          strokeLinecap="round" 
+          fill="none"
+        />
+        <circle cx="43" cy="36" r="2" className="fill-neutral-800 dark:fill-neutral-200" />
+        
+        <path 
+          d="M 60,68 C 64,46 78,42 75,36" 
+          className="stroke-neutral-800 dark:stroke-neutral-200"
+          strokeWidth="1.8" 
+          strokeLinecap="round" 
+          fill="none"
+        />
+        <circle cx="75" cy="36" r="2" className="fill-neutral-800 dark:fill-neutral-200" />
 
-          {/* t - Charcoal/Black (Swaps to white/light on dark theme) */}
-          <path
-            d="M390,160 H402 V180 H415 V192 H402 V242 C402,250 406,254 413,254 C417,254 420,252 422,250 L425,262 C418,266 410,266 403,266 C392,266 388,258 388,245 V192 H380 V180 H388 V160 Z"
-            fill={charcoalColor}
-          />
+        {/* Left Top Wing - Magenta */}
+        <path 
+          d="M 58,80 C 40,78 12,68 10,52 C 8,36 32,32 58,68 Z" 
+          fill="#E5007D" 
+        />
+        {/* Left Top Wing Accents */}
+        <path 
+          d="M 54,76 C 42,74 22,66 20,56 C 18,50 35,46 54,72 Z" 
+          fill="#FF8EC6" 
+          className="opacity-70"
+        />
+        <path 
+          d="M 50,72 C 40,70 28,64 26,58 C 24,54 36,52 50,68 Z" 
+          fill="#FFFFFF" 
+          className="opacity-40"
+        />
 
-          {/* h - Vibrant Yellow */}
-          <path
-            d="M435,145 H448 V192 C455,182 465,176 475,176 C492,176 500,188 500,208 V262 H487 V210 C487,198 482,190 472,190 C462,190 452,198 448,208 V262 H435 V145 Z"
-            fill={yellowColor}
-          />
+        {/* Left Bottom Wing - Cyan/Blue */}
+        <path 
+          d="M 58,80 C 42,94 15,102 18,116 C 21,126 43,122 58,88 Z" 
+          fill="#009EE0" 
+        />
+        {/* Left Bottom Wing Accent - Yellow Petal */}
+        <path 
+          d="M 52,86 C 42,94 28,100 30,108 C 32,112 44,108 52,94 Z" 
+          fill="#FFD400" 
+        />
+        <path 
+          d="M 46,92 C 38,98 29,102 31,106 C 32,108 38,106 44,98 Z" 
+          fill="#FFFFFF" 
+          className="opacity-40"
+        />
 
-          {/* i - Process Cyan body with Magenta/Pink dot */}
-          <g id="letter-i">
-            <rect x="512" y="180" width="13" height="82" rx="3" fill="#00A8FF" />
-            <circle cx="518.5" cy="155" r="9" fill={magentaColor} />
-          </g>
+        {/* Right Top Wing - Golden Yellow */}
+        <path 
+          d="M 60,80 C 78,78 108,68 110,52 C 112,36 88,32 60,68 Z" 
+          fill="url(#butterfly-yellow-grad-full)" 
+        />
+        {/* Right Top Wing Accent - Magenta */}
+        <path 
+          d="M 64,76 C 76,74 96,66 98,56 C 100,50 83,46 64,72 Z" 
+          fill="#E5007D" 
+          className="opacity-80"
+        />
+        <path 
+          d="M 68,72 C 76,70 88,64 90,58 C 92,54 81,52 68,68 Z" 
+          fill="#FFFFFF" 
+          className="opacity-40"
+        />
+
+        {/* Right Bottom Wing - Cyan/Blue */}
+        <path 
+          d="M 60,80 C 78,94 103,102 100,116 C 97,126 75,122 60,88 Z" 
+          fill="#009EE0" 
+        />
+        {/* Right Bottom Wing Accent */}
+        <path 
+          d="M 64,84 C 74,92 90,98 88,106 C 86,110 74,106 64,92 Z" 
+          fill="#FFFFFF" 
+          className="opacity-40"
+        />
+
+        {/* Body / Thorax */}
+        <path 
+          d="M 59,62 C 61,62 62,70 62,82 C 62,94 61,102 59,102 C 57,102 56,94 56,82 C 56,70 57,62 59,62 Z" 
+          className="fill-neutral-900 dark:fill-neutral-100" 
+        />
+      </g>
+
+      {/* 2. Custom serif "J" with elegant sweeping cursive tail under the butterfly */}
+      <path 
+        d="M 135,46 
+           L 185,46 
+           L 185,53 
+           L 173,53 
+           L 173,95 
+           C 173,115 160,128 140,135 
+           C 115,143 80,143 55,128 
+           C 35,115 32,90 42,72 
+           C 48,60 62,55 72,62 
+           C 80,68 82,78 76,84 
+           C 70,90 62,88 58,80 
+           C 56,76 58,70 64,70 
+           C 56,70 50,78 48,88 
+           C 46,102 55,116 72,122 
+           C 92,128 118,124 135,112 
+           C 150,100 156,88 156,78 
+           L 156,53 
+           L 145,53 
+           Z" 
+        fill="url(#j-gradient)"
+      />
+
+      {/* 3. Styled Typography "yothi" */}
+      <g id="typography">
+        {/* y - Magenta */}
+        <text 
+          x="178" 
+          y="102" 
+          fill="#E5007D" 
+          fontFamily="Georgia, 'Times New Roman', serif" 
+          fontSize="76" 
+          fontWeight="900"
+          className="select-none"
+        >
+          y
+        </text>
+
+        {/* o - Cyan with built-in CMYK register mark */}
+        <text 
+          x="222" 
+          y="102" 
+          fill="#009EE0" 
+          fontFamily="Georgia, 'Times New Roman', serif" 
+          fontSize="76" 
+          fontWeight="900"
+          className="select-none"
+        >
+          o
+        </text>
+
+        {/* CMYK Target Center in 'o' */}
+        <g id="cmyk-target" transform="translate(251, 74)">
+          {/* Circular frame */}
+          <circle cx="0" cy="0" r="14" stroke="#231F20" strokeWidth="1.2" className="dark:stroke-neutral-300" fill="none" />
+          
+          {/* 4 Quadrants representing ink separations */}
+          <path d="M 0,0 L 0,-14 A 14,14 0 0,1 14,0 Z" fill="#E5007D" /> {/* Magenta Top Right */}
+          <path d="M 0,0 L 14,0 A 14,14 0 0,1 0,14 Z" fill="#FFD400" />  {/* Yellow Bottom Right */}
+          <path d="M 0,0 L 0,14 A 14,14 0 0,1 -14,0 Z" fill="#231F20" />  {/* Black Bottom Left */}
+          <path d="M 0,0 L -14,0 A 14,14 0 0,1 0,-14 Z" fill="#009EE0" /> {/* Cyan Top Left */}
+
+          {/* Crosshairs */}
+          <line x1="-18" y1="0" x2="18" y2="0" stroke="#231F20" strokeWidth="1.5" className="dark:stroke-neutral-200" />
+          <line x1="0" y1="-18" x2="0" y2="18" stroke="#231F20" strokeWidth="1.5" className="dark:stroke-neutral-200" />
+          <circle cx="0" cy="0" r="4" fill="white" stroke="#231F20" strokeWidth="1" />
         </g>
 
-        {/* CMYK Swoosh Waves flowing underneath typography */}
-        <g id="waves">
-          {/* Blue Swash */}
-          <path
-            d="M120,295 Q280,380 500,270 Q560,240 600,265 Q500,310 320,330 Q180,330 120,295 Z"
-            fill="#0070C0"
-            opacity="0.85"
-          />
-          {/* Magenta Swash */}
-          <path
-            d="M150,298 Q290,375 480,268 Q540,235 590,258 Q490,298 330,315 Q190,315 150,298 Z"
-            fill={magentaColor}
-            opacity="0.85"
-          />
-          {/* Yellow Swash */}
-          <path
-            d="M180,301 Q300,370 460,266 Q520,230 580,250 Q480,288 340,302 Q200,302 180,301 Z"
-            fill={yellowColor}
-            opacity="0.9"
-          />
-          {/* Black / Charcoal Swash */}
-          <path
-            d="M210,305 Q310,365 440,264 Q500,225 570,242 Q470,278 350,290 Q220,290 210,305 Z"
-            fill={charcoalColor}
-            opacity="0.95"
-          />
-        </g>
+        {/* t - Adaptive Charcoal */}
+        <text 
+          x="278" 
+          y="102" 
+          fontFamily="Georgia, 'Times New Roman', serif" 
+          fontSize="76" 
+          fontWeight="900"
+          className="fill-neutral-900 dark:fill-neutral-100 select-none"
+        >
+          t
+        </text>
 
-        {/* Subtitle text: "PRINTING WORKS" */}
-        {showText && (
-          <g id="printing-works">
-            {/* Left rule line (Cyan) */}
-            <line x1="145" y1="350" x2="210" y2="350" stroke="#0091FF" strokeWidth="4" strokeLinecap="round" />
-            
-            {/* Underline Subheading text */}
-            <text
-              x="360"
-              y="358"
-              fontFamily="'Montserrat', 'Inter', sans-serif"
-              fontSize="28"
-              fontWeight="700"
-              letterSpacing="7"
-              fill={charcoalColor}
-              textAnchor="middle"
-            >
-              PRINTING WORKS
-            </text>
-            
-            {/* Right rule line (Magenta) */}
-            <line x1="510" y1="350" x2="575" y2="350" stroke={magentaColor} strokeWidth="4" strokeLinecap="round" />
-          </g>
-        )}
-      </svg>
-    </div>
+        {/* h - Golden Yellow Gradient */}
+        <text 
+          x="310" 
+          y="102" 
+          fill="url(#h-gradient)" 
+          fontFamily="Georgia, 'Times New Roman', serif" 
+          fontSize="76" 
+          fontWeight="900"
+          className="select-none"
+        >
+          h
+        </text>
+
+        {/* i - Cyan with Magenta Dot */}
+        <text 
+          x="364" 
+          y="102" 
+          fill="#009EE0" 
+          fontFamily="Georgia, 'Times New Roman', serif" 
+          fontSize="76" 
+          fontWeight="900"
+          className="select-none"
+        >
+          i
+        </text>
+        <circle cx="376" cy="46" r="6.5" fill="#E5007D" />
+      </g>
+
+      {/* 4. Sinuous Wave / Color Sweeps underneath the text */}
+      <g id="sweeps" transform="translate(0, 5)">
+        {/* Cyan wave */}
+        <path 
+          d="M 145,116 C 220,128 320,130 435,104" 
+          stroke="#009EE0" 
+          strokeWidth="4" 
+          strokeLinecap="round" 
+          fill="none"
+        />
+        {/* Magenta wave */}
+        <path 
+          d="M 160,121 C 230,133 325,135 430,110" 
+          stroke="#E5007D" 
+          strokeWidth="4" 
+          strokeLinecap="round" 
+          fill="none"
+        />
+        {/* Yellow wave */}
+        <path 
+          d="M 175,126 C 240,138 330,140 425,116" 
+          stroke="#FFD400" 
+          strokeWidth="4" 
+          strokeLinecap="round" 
+          fill="none"
+        />
+        {/* Charcoal wave */}
+        <path 
+          d="M 190,131 C 250,143 335,145 420,122" 
+          className="stroke-neutral-900 dark:stroke-neutral-100" 
+          strokeWidth="4" 
+          strokeLinecap="round" 
+          fill="none"
+        />
+      </g>
+
+      {/* 5. Subtext: PRINT STUDIO with decorative horizontal lines */}
+      <g id="print-studio" transform="translate(0, 5)">
+        {/* Cyan accent line left */}
+        <line x1="95" y1="145" x2="150" y2="145" stroke="#009EE0" strokeWidth="2.5" strokeLinecap="round" />
+        
+        {/* Subtitle */}
+        <text 
+          x="265" 
+          y="150" 
+          className="fill-neutral-900 dark:fill-neutral-100 select-none font-sans font-black tracking-[0.45em] text-[13px]" 
+          textAnchor="middle"
+        >
+          PRINT STUDIO
+        </text>
+        
+        {/* Cyan accent line right */}
+        <line x1="380" y1="145" x2="435" y2="145" stroke="#009EE0" strokeWidth="2.5" strokeLinecap="round" />
+      </g>
+    </svg>
   );
 }

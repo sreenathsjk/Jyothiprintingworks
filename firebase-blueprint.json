@@ -1,0 +1,92 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile document linking to authentication ID",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" }
+      },
+      "required": ["id", "name", "email", "phone"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Custom garment and standard product orders",
+      "type": "object",
+      "properties": {
+        "orderId": { "type": "string" },
+        "userEmail": { "type": "string" },
+        "customerName": { "type": "string" },
+        "orderDate": { "type": "string" },
+        "productTitle": { "type": "string" },
+        "fabricType": { "type": "string" },
+        "printMethod": { "type": "string" },
+        "quantity": { "type": "integer" },
+        "totalAmount": { "type": "number" },
+        "estimatedDelivery": { "type": "string" },
+        "currentStatus": { "type": "string" },
+        "items": { "type": "array" },
+        "paymentMethod": { "type": "string" },
+        "paymentId": { "type": "string" },
+        "steps": { "type": "array" }
+      },
+      "required": [
+        "orderId",
+        "userEmail",
+        "customerName",
+        "orderDate",
+        "productTitle",
+        "fabricType",
+        "printMethod",
+        "quantity",
+        "totalAmount",
+        "estimatedDelivery",
+        "currentStatus",
+        "items",
+        "paymentMethod",
+        "paymentId",
+        "steps"
+      ]
+    },
+    "Product": {
+      "title": "Product",
+      "description": "Apparel and boutique designs catalog products",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "tagline": { "type": "string" },
+        "price": { "type": "number" },
+        "originalPrice": { "type": "number" },
+        "category": { "type": "string" },
+        "rating": { "type": "number" },
+        "reviewCount": { "type": "integer" },
+        "images": { "type": "array" },
+        "colors": { "type": "array" },
+        "sizes": { "type": "array" },
+        "description": { "type": "string" },
+        "specifications": { "type": "array" },
+        "isBestSeller": { "type": "boolean" },
+        "isNewArrival": { "type": "boolean" }
+      },
+      "required": ["id", "title", "tagline", "price", "originalPrice", "category", "images", "colors", "sizes", "description"]
+    }
+  },
+  "firestore": {
+    "users/{userId}": {
+      "schema": "User",
+      "description": "User profiles indexed by their Firebase Auth UID"
+    },
+    "orders/{orderId}": {
+      "schema": "Order",
+      "description": "Custom printing and streetwear checkout orders"
+    },
+    "products/{productId}": {
+      "schema": "Product",
+      "description": "Custom boutique and streetwear designs catalog managed by administrators"
+    }
+  }
+}
